@@ -1,0 +1,15 @@
+/local-only/
+/payloads/*
+!/payloads/SOURCES.md
+/tools/*
+!/tools/SOURCES.md
+__pycache__/
+*.i64
+*.id0
+*.id1
+*.id2
+*.nam
+*.til
+
+/roms/*
+!/roms/SOURCES.md
