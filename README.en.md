@@ -4,9 +4,13 @@
 
 Recorded on October 1, 2026. Tested device: Redmi 4X (`santoni`), 2 GB RAM, 16 GB eMMC, originally running MIUI 8.2.18.0.
 
-**The device successfully booted the matching TWRP 3.7.0 and LineageOS 18.1 (Android 11, Linux 4.19). The user subsequently flashed a Magisk-patched boot image with the bypass footer restored and reported success.** Magisk shows `Ramdisk: Yes`. The exact Magisk APK version used was not recorded. Hardware, calls, battery life and long-term performance have not been comprehensively tested.
+**This is an AI-written overview of the project, which I think serves as an introduction. For the physical steps, such as shorting the test points, see my blog. I will add the blog link here once the post is written.**
 
-This is a **boot verification bypass with a locked bootloader, not an official unlock**. No device-specific Xiaomi unlock signature was obtained, and an unlocked flag changing to true was not verified. Fastboot flashing restrictions may remain. This record does not cover removing a Mi account.
+**The most detailed flashing commands are still provided here.**
+
+The baseband version is displayed, but I have not inserted a SIM card to test it yet.
+
+This is a **boot verification bypass with a locked bootloader, not an official unlock**. No device-specific Xiaomi unlock signature was obtained, and an unlocked flag changing to true was not verified. Fastboot flashing restrictions may remain. Flashing can proceed even if a Mi account is already signed in on the phone.
 
 ## Tested combination and mechanism
 
@@ -203,9 +207,9 @@ The last hash applies only to this user's particular output; other patching runs
 
 ## Troubleshooting and rollback
 
-- **900E or failure to boot:** inspect actual partition contents, the aboot version and footer. Do not repeatedly format Data.
+- **900E or failure to boot:** ~~inspect actual partition contents, the aboot version and footer. Do not repeatedly format Data.~~ After confirming the partition contents are correct, disconnect the battery cable and reconnect it, then power the phone on again.
 - **EDL Status 21 or a partial write:** this phone was successfully rewritten using the padded 1 MiB aboot and 16 KiB payload, then read back. Failure does not mean nothing was written. emmcdl 2.15 produced inconsistent large-partition reads on this device; 2.16 was reliable.
-- **Missing fingerprint settings:** after reconnecting the sensor cable, its HAL was found stopped. The user subsequently reported recovery, but the exact recovery action was not recorded. Declared hardware features/properties alone do not prove a working sensor.
+- **Missing fingerprint settings:** ~~after reconnecting the sensor cable, its HAL was found stopped. The user subsequently reported recovery, but the exact recovery action was not recorded. Declared hardware features/properties alone do not prove a working sensor.~~ If the phone was first booted with the fingerprint sensor cable disconnected, reconnect the cable and reboot.
 - **Stock rollback:** use only this device's backups and verify full readbacks. Restoring aboot/recovery alone does not restore the modified system/cust/metadata/data. The original aboot rejects the current custom boot; do not mix them as a working configuration.
 
 ```powershell
